@@ -9,7 +9,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p {
   margin-top: 0;
 }
 
@@ -401,6 +402,10 @@ img {
   margin-right: 120px;
 }
 
+.site-footer-column.small-space {
+  margin-right: 80px;
+}
+
 .site-footer-column:last-child {
   margin-right: 0;
 }
@@ -439,16 +444,6 @@ img {
   gap: 24px;
 }
 
-.subscribe-form .form-label {
-  display: flex;
-  flex-direction: column;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-  color: #fff;
-}
-
 .subscribe-form .input-text {
   border: 1px solid #fff;
   border-radius: 4px;
@@ -456,8 +451,10 @@ img {
   height: 40px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
   padding: 8px 16px;
-  margin-top: 16px;
   background-color: transparent;
+  font-size: 12px;
+  line-height: 2;
+  letter-spacing: 0.04em;
   color: #fff;
   outline: none;
   transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -480,10 +477,9 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
   border-radius: 4px;
   padding: 8px 24px;
-  width: 165px;
+  min-width: 165px;
   height: 40px;
   background: #4d5ae5;
   font-weight: 500;
@@ -495,6 +491,7 @@ img {
   box-shadow: none;
   border: none;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 }
 
 .subscribe-form .form-submit:hover,
@@ -503,6 +500,7 @@ img {
 }
 
 .subscribe-form .form-submit-icon {
+  margin-left: 16px;
   fill: #fff;
 }
 
@@ -520,22 +518,74 @@ img {
   height: 100%;
   z-index: 999;
   background: rgba(46, 47, 66, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
 }
 
 /* Modal */
 .modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12),
     0 2px 1px 0 rgba(0, 0, 0, 0.2);
   background: #fcfcfc;
   border-radius: 4px;
   width: 408px;
-  height: 90%;
-  max-height: 584px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  min-height: 584px;
+  padding: 72px 24px 24px;
   overflow-y: auto;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal .close-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #e7e9fc;
+  fill: #2e2f42;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+  border 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal .close-button:hover,
+.modal .close-button:focus {
+  background-color: #404bbf;
+  border: none;
+  fill: #fff;
+}
+
+.modal .close-icon {
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-title {
+  margin-bottom: 16px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: #2e2f42;
 }
 
 /* Contact form */
@@ -544,10 +594,143 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+}
+
+.contact-form .form-item {
+  width: 100%;
+  margin-bottom: 8px;
 }
 
 .contact-form .form-label {
-  display: flex;
-  flex-direction: column;
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.04em;
+  color: #8e8f99;
+}
+
+.contact-form .form-text,
+.contact-form .form-full_text {
+  display: block;
+  width: 100%;
+  padding: 8px 8px 8px 38px;
+  background-color: transparent;
+  border: 1px solid rgba(46, 47, 66, 0.4);
+  border-radius: 4px;
+  outline: transparent;
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-form .form-text {
+  height: 40px;
+}
+
+.contact-form .form-full_text {
+  padding: 8px 16px;
+  resize: none;
+}
+
+.contact-form .form-text,
+.contact-form .form-full_text,
+.contact-form .form-text::placeholder,
+.contact-form .form-full_text::placeholder {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.04em;
+  color: rgba(46, 47, 66, 0.4);
+}
+
+.contact-form .form-text:focus,
+.contact-form .form-full_text:focus {
+  border-color: #4d5ae5;
+}
+
+.contact-form .form-item--full {
+  margin-bottom: 16px;
+}
+
+.contact-form .form-full_text {
+  height: 120px;
+}
+
+.contact-form .form-input {
+  position: relative;
+}
+
+.contact-form .form-input-icon {
+  fill: #2e2f42;
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-form .form-text:focus ~ .form-input-icon {
+  fill: #4d5ae5;
+}
+
+.contact-form .form-item-checkbox {
+  margin-bottom: 24px;
+}
+
+.contact-form .custom-checkbox {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 16px;
+  width: 16px;
+  border-radius: 2px;
+  border: 1px solid rgba(46, 47, 66, 0.4);
+  fill: transparent;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), border 250ms cubic-bezier(0.4, 0, 0.2, 1), fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-form .form-checkbox:checked + .form-label-checkbox .custom-checkbox {
+  border: none;
+  background-color: #404bbf;
+  fill: #F4F4FD;
+}
+
+.contact-form .form-label-checkbox {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.04em;
+  color: #8e8f99;
+}
+
+.contact-form .form-label-checkbox a {
+  line-height: 1.33333;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #4d5ae5;
+}
+
+.contact-form .form-submit {
+  margin: 0;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
+  background: #4d5ae5;
+  border-radius: 4px;
+  border: none;
+  padding: 16px 32px;
+  min-width: 169px;
+  height: 56px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-align: center;
+  align-self: center;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-form .form-submit:hover,
+.contact-form .form-submit:focus {
+  background-color: #404bbf;
 }
